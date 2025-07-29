@@ -34,32 +34,30 @@ A structured mobile interface built with Flutter that includes:
     - Remove – Deletes the pose from the database  
 
 ---
+### Database (MySQL via XAMPP/phpMyAdmin)
 
-### Database (MySQL via XAMPP/phpMyAdmin)  
 Two tables manage the motor pose data:
 
-#### Table: Pose
-Stores all saved poses created by the user.
+#### Table: `Pose`
 
-| Column     | Type    | Description               |
-|------------|---------|---------------------------|
-| id       | INT     | Auto-increment primary key|
-| motor1   | FLOAT   | Angle of motor 1          |
-| motor2   | FLOAT   | Angle of motor 2          |
-| motor3   | FLOAT   | Angle of motor 3          |
-| motor4   | FLOAT   | Angle of motor 4          |
+This table stores all saved poses created by the user. It contains the following columns:
 
-#### Table: Run
-Stores the pose to be executed.
+- **id**: An `INT` value, serves as the auto-increment primary key.
+- **motor1**: A `FLOAT` representing the angle of motor 1.
+- **motor2**: A `FLOAT` representing the angle of motor 2.
+- **motor3**: A `FLOAT` representing the angle of motor 3.
+- **motor4**: A `FLOAT` representing the angle of motor 4.
 
-| Column     | Type    | Description               |
-|------------|---------|---------------------------|
-| id       | INT     | Auto-increment primary key|
-| motor1   | FLOAT   | Angle of motor 1          |
-| motor2   | FLOAT   | Angle of motor 2          |
-| motor3   | FLOAT   | Angle of motor 3          |
-| motor4   | FLOAT   | Angle of motor 4          |
-| status  | TINYINT | Default is 0 or it's 1     |
+#### Table: `Run`
+
+This table stores the pose that should be executed. It includes:
+
+- **id**: An `INT` value, auto-increment primary key.
+- **motor1**: A `FLOAT` for motor 1 angle.
+- **motor2**: A `FLOAT` for motor 2 angle.
+- **motor3**: A `FLOAT` for motor 3 angle.
+- **motor4**: A `FLOAT` for motor 4 angle.
+- **status**: A `TINYINT`, usually `0` or `1`, indicating whether this pose is selected to run.
 
 ---
 
@@ -86,17 +84,18 @@ Stores the pose to be executed.
 
 ---
 
-## Project Screenshot  
+## Project Screenshots
+
 Below are screenshots demonstrating the app and database interface:
 
-- Flutter Interface  
-  ![Flutter UI](flutter_ui.png)
+### Flutter Interface  
+![Flutter UI](flutter_ui.png)
 
-- MySQL Table Pose  
-  ![Pose Screenshot](Pose.png)
+### MySQL Table: `Pose`  
+![Pose Screenshot](Pose.png)
 
-- MySQL Table Run  
-  ![Run Screenshot](Run.png)
+### MySQL Table: `Run`  
+![Run Screenshot](Run.png)
 
 ---
 ## Created By  
