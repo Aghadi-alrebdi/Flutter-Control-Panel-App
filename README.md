@@ -81,6 +81,59 @@ This table stores the pose that should be executed. It includes:
   - Modular PHP files (save_pose.php, run_pose.php, get_poses.php, delete_pose.php, load_pose.php)
   - Mobile UI with structured layout using Column, ListView, DataTable
   - Localhost API calls via http://10.0.2.2/ for emulator access
+---
+
+## Backend PHP Files
+
+### `update_status.php`
+
+```php
+<?php
+include 'db.php';
+
+$servo1 = isset($_POST['servo1']) ? intval($_POST['servo1']) : 90;
+$servo2 = isset($_POST['servo2']) ? intval($_POST['servo2']) : 90;
+$servo3 = isset($_POST['servo3']) ? intval($_POST['servo3']) : 90;
+$servo4 = isset($_POST['servo4']) ? intval($_POST['servo4']) : 90;
+
+$conn->query("UPDATE run SET status = 0");
+
+$stmt = $conn->prepare("INSERT INTO run (servo1, servo2, servo3, servo4, status) VALUES (?, ?, ?, ?, 1)");
+$stmt->bind_param("iiii", $servo1, $servo2, $servo3, $servo4);
+
+if ($stmt->execute()) {
+    echo json_encode(['success' => true, 'message' => 'Run pose saved']);
+} else {
+    echo json_encode(['success' => false, 'error' => $conn->error]);
+}
+
+$stmt->close();
+$conn->close();
+?>
+
+
+```
+
+---
+
+### `get_run_status.php`
+
+```php
+
+<?php
+include 'db.php';
+
+$result = $conn->query("SELECT * FROM Run WHERE status = 1");
+
+if ($result && $row = $result->fetch_assoc()) {
+    echo json_encode($row);
+} else {
+    echo json_encode(["message" => "No active run"]);
+}
+
+$conn->close();
+?>
+```
 
 ---
 
